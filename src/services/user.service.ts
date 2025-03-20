@@ -1,4 +1,4 @@
-import User from "../models/user";
+import User from "../db/models/user";
 
 export async function createUser(params: any): Promise<User> {
   try {

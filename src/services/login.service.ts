@@ -1,6 +1,6 @@
 import { AES, enc, mode, pad } from "crypto-js";
 import { Client } from "undici";
-import User from "../models/user";
+import User from "../db/models/user";
 import { decryptPassword } from "./password.service";
 import { getRefreshToken } from "./punch-in-out.service";
 

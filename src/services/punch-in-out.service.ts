@@ -1,10 +1,10 @@
 import { Client } from "undici";
-import User from "../models/user";
-import { loginToZingHr } from "./login.service";
+import User from "../db/models/user";
 import {
   PunchInOutResponse,
   RefreshTokenResponse,
 } from "../types/punch-in-out";
+import { loginToZingHr } from "./login.service";
 
 const client = new Client("https://mservices.zinghr.com");
 
@@ -19,8 +19,8 @@ export async function punchInOutAll() {
 
 async function punchInOut(user: User) {
   const body = JSON.stringify({
-    latitude: 11.044755,
-    longitude: 77.037105,
+    latitude: 11.0424717,
+    longitude: 77.0342519,
     location: "",
     formattedAddress: "",
     deviceID: "",
@@ -35,21 +35,16 @@ async function punchInOut(user: User) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${user.jwt_token}`,
     },
-    body: body,
+    body,
   });
 
   if (statusCode === 200) {
-    const response: PunchInOutResponse =
-      (await responseBody.json()) as PunchInOutResponse;
-    if (response.code === 1) {
-      console.log(response.message);
-    } else {
-      console.log(response.message);
-    }
+    const response = (await responseBody.json()) as PunchInOutResponse;
+    console.log(user.emp_code, response.message);
   } else if (statusCode === 401) {
     getRefreshToken(user);
   } else {
-    console.error("Error in punch In/Out", statusCode);
+    console.error(user.emp_code, "Error in punch In/Out", statusCode);
   }
 }
 
@@ -69,11 +64,10 @@ export async function getRefreshToken(user: User) {
   });
 
   if (statusCode === 200) {
-    const response: RefreshTokenResponse =
-      (await responseBody.json()) as RefreshTokenResponse;
+    const response = (await responseBody.json()) as RefreshTokenResponse;
     if (response.code === 1) {
       const token = response.data.token;
-      console.log("Got token", token);
+      console.log(user.emp_code, "Got token", token);
       if (token) {
         user.jwt_token = token;
         await user.save();
@@ -85,6 +79,6 @@ export async function getRefreshToken(user: User) {
   } else if (statusCode === 400) {
     loginToZingHr(user);
   } else {
-    console.log("Error in getting refresh token", statusCode);
+    console.log(user.emp_code, "Error in getting refresh token", statusCode);
   }
 }

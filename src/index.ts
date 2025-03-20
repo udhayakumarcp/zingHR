@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: `${__dirname}/../.env` });
 
-import sequelize from "./config/database";
 import server from "./app";
+import sequelize from "./config/database";
 
 const PORT = Number(process.env.PORT) || 4000;
 
