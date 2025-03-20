@@ -11,7 +11,7 @@ const server = Fastify({
 server.register(fastifyCron, {
   jobs: [
     {
-      cronTime: "50 09,18 * * 1-5",
+      cronTime: "30 4,13 * * 1-5",
       onTick: punchInOutAll,
       runOnInit: true,
     },
