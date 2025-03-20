@@ -3,7 +3,7 @@ import User from "../db/models/user";
 import {
   PunchInOutResponse,
   RefreshTokenResponse,
-} from "../types/punch-in-out";
+} from "../types/punch-in-out.types";
 import { loginToZingHr } from "./login.service";
 
 const client = new Client("https://mservices.zinghr.com");

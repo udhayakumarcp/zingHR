@@ -1,11 +1,12 @@
+import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import Fastify from "fastify";
 import fastifyCron from "fastify-cron";
-import userRoutes from "./routes/users";
+import userRoutes from "./modules/user/user.routes";
 import { punchInOutAll } from "./services/punch-in-out.service";
 
 const server = Fastify({
   logger: true,
-});
+}).withTypeProvider<TypeBoxTypeProvider>();
 
 server.register(fastifyCron, {
   jobs: [

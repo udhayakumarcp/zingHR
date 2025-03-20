@@ -18,7 +18,16 @@ User.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    emp_code: { type: DataTypes.STRING, allowNull: false, unique: true },
+    emp_code: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: {
+          msg: "Please provide Employee code",
+        },
+      },
+    },
     password: { type: DataTypes.STRING, allowNull: false },
     jwt_token: DataTypes.TEXT,
     auth_token: DataTypes.STRING,
@@ -28,7 +37,7 @@ User.init(
     modelName: "User",
     tableName: "users",
     underscored: true,
-  }
+  },
 );
 
 export default User;
