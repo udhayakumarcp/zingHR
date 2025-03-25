@@ -7,6 +7,12 @@ export async function createUser(params: createUserBody): Promise<User> {
   return await User.create({ ...params, password });
 }
 
+export async function listUsers(): Promise<User[]> {
+  return await User.findAll({
+    attributes: ["id", "emp_code"],
+  });
+}
+
 export async function updateUser(
   params: userQueryParams,
   body: updateUserBody,

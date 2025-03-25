@@ -2,8 +2,12 @@ import {
   FastifyReplyTypeBox,
   FastifyRequestTypeBox,
 } from "../../types/fastify.types";
-import { createUserSchema, updateUserSchema } from "./user.schema";
-import { createUser, updateUser } from "./user.service";
+import {
+  createUserSchema,
+  getUsersSchema,
+  updateUserSchema,
+} from "./user.schema";
+import { createUser, listUsers, updateUser } from "./user.service";
 
 export async function createUserHandler(
   request: FastifyRequestTypeBox<typeof createUserSchema>,
@@ -12,6 +16,18 @@ export async function createUserHandler(
   try {
     const { body } = request;
     const user = await createUser(body);
+    reply.send(user);
+  } catch (error) {
+    reply.status(500).send(error);
+  }
+}
+
+export async function listUsersHandler(
+  request: FastifyRequestTypeBox<typeof getUsersSchema>,
+  reply: FastifyReplyTypeBox<typeof getUsersSchema>,
+) {
+  try {
+    const user = await listUsers();
     reply.send(user);
   } catch (error) {
     reply.status(500).send(error);

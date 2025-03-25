@@ -14,6 +14,18 @@ export const createUserSchema = {
   },
 };
 
+export const getUsersSchema = {
+  response: {
+    200: Type.Array(
+      Type.Object({
+        id: Type.Number(),
+        emp_code: Type.String(),
+      }),
+    ),
+    500: Type.Any(),
+  },
+};
+
 export const updateUserSchema = {
   params: Type.Object({
     id: Type.Number(),
@@ -23,7 +35,7 @@ export const updateUserSchema = {
     password: Type.String(),
   }),
   response: {
-    201: Type.Object({
+    200: Type.Object({
       id: Type.Number(),
       emp_code: Type.String(),
     }),
