@@ -9,7 +9,23 @@ export const createUserSchema = {
     201: Type.Object({
       id: Type.Number(),
       emp_code: Type.String(),
-      password: Type.String(),
+    }),
+    500: Type.Any(),
+  },
+};
+
+export const updateUserSchema = {
+  params: Type.Object({
+    id: Type.Number(),
+  }),
+  body: Type.Object({
+    emp_code: Type.String(),
+    password: Type.String(),
+  }),
+  response: {
+    201: Type.Object({
+      id: Type.Number(),
+      emp_code: Type.String(),
     }),
     500: Type.Any(),
   },

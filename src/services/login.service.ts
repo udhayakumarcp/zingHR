@@ -13,7 +13,7 @@ export async function loginToZingHr(user: User) {
 
   const decryptedUserPassword = decryptPassword(user.password);
 
-  const password = EncryptPassword(randomKey, decryptedUserPassword);
+  const password = encryptPassword(randomKey, decryptedUserPassword);
 
   const body = JSON.stringify({
     SubscriptionName: "netcongrp",
@@ -50,7 +50,7 @@ export async function loginToZingHr(user: User) {
   }
 }
 
-function EncryptPassword(AESEncryptionKey: string, PlainPassword: string) {
+function encryptPassword(AESEncryptionKey: string, PlainPassword: string) {
   const currentDate = new Date();
   const IVKey =
     (currentDate.getUTCDate() < 10
