@@ -11,9 +11,10 @@ const server = Fastify({
 server.register(fastifyCron, {
   jobs: [
     {
-      cronTime: "30 4,13 * * 1-5",
+      cronTime: "30 9,18 * * 1-5",
       onTick: punchInOutAll,
       runOnInit: true,
+      timeZone: "Asia/Kolkata",
     },
   ],
 });

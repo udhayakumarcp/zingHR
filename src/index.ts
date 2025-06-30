@@ -4,7 +4,7 @@ dotenv.config({ path: `${__dirname}/../.env` });
 import server from "./app";
 import sequelize from "./config/database";
 
-const PORT = Number(process.env.PORT) || 4000;
+const PORT = Number(process.env.PORT) || 3000;
 
 (async () => {
   try {
